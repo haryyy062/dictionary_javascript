@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DictionaryApp</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-image: url('./imageD1.jpg'); /* Replace 'background-image.jpg' with your image file path */
+            background-size: 100%;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 5px;
+            width: 200px;
+        }
+        input[type="submit"] {
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        #definition {
+            font-weight: bold;
+            font-style: oblique;
+        }
+
+        body {
+             background-color: lightgrey;
+            color: rgb(103, 124, 120);
+        }
+
+        div {
+             background-color: rgb(131, 164, 145);
+              color: white;
+        }
+
+    </style>
+</head>
+<body align="center">
+    <h1> Word Dictionary</h1>
+    <br><br>
+    <form>
+        <tr>
+            <th>Search Word :</th>
+            <td><input type="text" id="word" placeholder="Search"></td>
+        </tr>
+        <tr>
+			<td colspan="2" align="center"><input type="submit" value="submit" id="submit"></td>
+        </tr>
+    </form>
+    <br><br><br>
+        Definition of Word :<span id="definition"></span>
+        
+    <script>
+                 const url = 'https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary?word=dark';
+                const options = {
+	                method: 'GET',
+	                headers: {
+	                        	'X-RapidAPI-Key': '5254bcec88msh1d4a0aa96680188p1fd0aajsnc9a9ffcdf3c2',
+		                        'X-RapidAPI-Host': 'dictionary-by-api-ninjas.p.rapidapi.com'
+                        	}
+                        };
+
+                    const DictionaryApp = (word) => {
+
+
+                        fetch('https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary?word=' + word , options)
+                        .then( (response) => { return response.json()})
+                        .then( (data) => { console.log(data)
+                        
+                            definition.innerHTML = data.definition
+                        
+                           
+                        
+                        })
+                    }
+
+                    submit.addEventListener("click", (event) => {
+				    event.preventDefault()
+				    DictionaryApp(word.value)
+			
+			})              
+    </script>
+</body>
+</html>
